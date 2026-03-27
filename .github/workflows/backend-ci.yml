@@ -2,9 +2,9 @@ name: Backend CI
 
 on:
   push:
-    branches: [main]
+    branches: [main]  #when code is pushed to main branch
   pull_request:
-    branches: [main]
+    branches: [main] # when a pull request is opened against the main branch
 
 jobs:
   test-backend:
@@ -12,19 +12,20 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 #checkout and get the code
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5 #set up Python environment
         with:
           python-version: '3.12'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
+          pip install -r backend/requirements.txt  #install dependencies from requirements.txt
 
       - name: Run Django auth tests
         working-directory: backend
         run: |
-          python manage.py test apps.auth_api -v 2
+          python manage.py test apps.auth_api -v 2     
+          # Run tests for the auth_api app with increased verbosity
