@@ -1,8 +1,11 @@
 import json
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_POST
 
 
@@ -15,37 +18,36 @@ def parse_json_body(request):
         return {}
 
 
+def authenticate_user(request, username, password):
+    # 统一处理用户名清理和 Django 认证，避免 API 和页面登录逻辑重复。
+    cleaned_username = str(username).strip()
+    cleaned_password = str(password)
+
+    if not cleaned_username or not cleaned_password:
+        return None, cleaned_username, "Username and password are required"
+
+    user = authenticate(request, username=cleaned_username, password=cleaned_password)
+    if not user:
+        return None, cleaned_username, "Invalid username or password"
+
+    return user, cleaned_username, None
+
+
 @csrf_exempt #不检查csrf token
 @require_POST #只允许POST请求访问这个接口
 def login_view(request):
     # 先把请求体里的 JSON 取出来。
     payload = parse_json_body(request)
-
-    # 读取 username 和 password。
-    # username 这里额外做了 strip()，可以自动去掉前后空格。
-    username = str(payload.get("username", "")).strip()
-    password = str(payload.get("password", ""))
-
-    # 只要有一个字段为空，就直接返回 400。
-    # 这是最小的输入校验，避免把空值继续交给认证逻辑。
-    if not username or not password:
+    user, username, error_message = authenticate_user(
+        request,
+        payload.get("username", ""),
+        payload.get("password", ""),
+    )
+    if error_message:
         return JsonResponse(
             {
                 "authenticated": False,
-                "error": "Username and password are required",
-            },
-            status=400,
-        )
-
-    # authenticate() 是 Django 自带的认证函数。
-    # 它会去数据库里查这个用户名和密码是否匹配。
-    # 匹配成功就返回 user 对象，失败就返回 None。
-    user = authenticate(request, username=username, password=password)
-    if not user:
-        return JsonResponse(
-            {
-                "authenticated": False,
-                "error": "Invalid username or password",
+                "error": error_message,
             },
             status=400,
         )
@@ -62,6 +64,50 @@ def login_view(request):
             "username": user.username,
         }
     )
+
+
+@require_GET
+def home_page(request):
+    # 首页只做最小导航，让 Selenium 有一个稳定的落点。
+    return render(request, "auth_api/home.html")
+
+
+def login_page(request):
+    # 已登录用户直接跳到 dashboard，避免重复登录。
+    if request.user.is_authenticated:
+        return redirect("dashboard_page")
+
+    if request.method == "POST":
+        user, username, error_message = authenticate_user(
+            request,
+            request.POST.get("username", ""),
+            request.POST.get("password", ""),
+        )
+        if error_message:
+            return render(
+                request,
+                "auth_api/login.html",
+                {"error": error_message, "username": username},
+                status=400,
+            )
+
+        login(request, user)
+        return redirect("dashboard_page")
+
+    return render(request, "auth_api/login.html")
+
+
+@login_required(login_url="/login/")
+def dashboard_page(request):
+    # 登录后的最小页面，用来练 Selenium 的状态断言和 logout 流程。
+    return render(request, "auth_api/dashboard.html")
+
+
+@require_POST
+def logout_page(request):
+    # 页面登出成功后回到登录页。
+    logout(request)
+    return redirect("login_page")
 
 
 @csrf_exempt  # 不检查 csrf token

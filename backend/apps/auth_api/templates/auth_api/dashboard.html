@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 720px;
+        margin: 48px auto;
+        padding: 0 16px;
+        line-height: 1.5;
+      }
+
+      .card {
+        border: 1px solid #d4d4d8;
+        border-radius: 12px;
+        padding: 24px;
+      }
+
+      button {
+        padding: 10px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1 id="dashboard-title">Dashboard</h1>
+      <p id="welcome-message">Welcome, {{ request.user.username }}</p>
+      <p>This page is protected and is useful for Selenium login assertions.</p>
+      <form id="logout-form" method="post" action="/logout/">
+        {% csrf_token %}
+        <button id="logout-submit" type="submit">Logout</button>
+      </form>
+    </div>
+  </body>
+</html>
