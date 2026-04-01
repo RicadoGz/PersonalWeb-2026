@@ -1,0 +1,17 @@
+@PersonalWeb.Api_HostAddress = http://localhost:5038
+#define varaible all will be this value
+GET {{PersonalWeb.Api_HostAddress}}/
+Accept: application/json
+###
+#get return json
+POST {{PersonalWeb.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "demo-admin",
+  "password": "123456"
+}
+###
+
+GET {{PersonalWeb.Api_HostAddress}}/api/auth/me
+Accept: application/json

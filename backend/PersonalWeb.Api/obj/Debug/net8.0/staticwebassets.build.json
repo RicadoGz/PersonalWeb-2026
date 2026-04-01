@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0YI4xhkMKzLcQs8xR/a3u8rZ5cmEQIGJzSJ0+uTWTFs=",
+  "Source": "PersonalWeb.Api",
+  "BasePath": "_content/PersonalWeb.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
