@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/PersonalWeb.Api.csproj": {}
+    "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.api/PersonalWeb.Api.csproj": {}
   },
   "projects": {
-    "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/PersonalWeb.Api.csproj": {
+    "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.api/PersonalWeb.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/PersonalWeb.Api.csproj",
+        "projectUniqueName": "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.api/PersonalWeb.Api.csproj",
         "projectName": "PersonalWeb.Api",
-        "projectPath": "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/PersonalWeb.Api.csproj",
+        "projectPath": "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.api/PersonalWeb.Api.csproj",
         "packagesPath": "/Users/gz/.nuget/packages/",
-        "outputPath": "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/obj/",
+        "outputPath": "/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/gz/.nuget/NuGet/NuGet.Config"

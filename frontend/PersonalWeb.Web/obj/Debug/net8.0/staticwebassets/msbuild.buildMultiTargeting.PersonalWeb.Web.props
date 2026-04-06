@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/PersonalWeb.Web.props" />
+</Project>

@@ -13,7 +13,7 @@ Build a small full-stack personal website with:
 This project has two purposes:
 
 1. be a usable portfolio-style website
-2. give me a clean project to practice testing step by step
+2. give me a clean project to practice full-stack development with C# and Blazor
 
 ## 2. First Version Scope
 
@@ -122,71 +122,36 @@ Do not build everything at once.
 - show real data on pages
 - handle error states
 
-### Phase 5: End-to-End Flow
+### Phase 5: Core Management Flow
 
 - login
 - create project
 - edit project
 - delete project
 
-## 7. Testing Approach
-
-Testing should follow feature development, not come all at once.
-
-### For each feature
-
-1. define the feature
-2. build the smallest version
-3. test that feature only
-4. connect it to the next feature
-5. do integration testing after that
-
-### Testing order
-
-#### Auth first
-
-- login success
-- login failure
-- unauthenticated user check
-- logout
-
-#### Then project read
-
-- visitor can see project list
-- visitor can see project detail
-- unpublished project is hidden
-
-#### Then project write
-
-- admin can create project
-- admin can edit project
-- admin can delete project
-- anonymous user cannot create, edit, or delete
-
-#### Finally integration
-
-- login from frontend
-- admin page reads session correctly
-- full create and edit flow works
-
-## 8. Tech Stack
+## 7. Tech Stack
 
 ### Backend
 
-- Django
+- ASP.NET Core Web API
+- C#
+- cookie-based auth or ASP.NET Core Identity later if needed
 
 ### Frontend
 
-- Next.js
+- Blazor Web App
 
 ### Database
 
 - SQLite first
 
-### Testing
+## 8. Architecture Direction
 
-- Django test / pytest
-- Selenium later
+- frontend renders UI with Blazor components
+- backend exposes API endpoints in ASP.NET Core
+- frontend calls backend for auth and project data
+- admin pages stay protected behind authenticated backend routes
+- keep the first version small and server-friendly before adding extra infrastructure
 
 ## 9. Immediate Next Step
 
@@ -200,7 +165,6 @@ Do these in order:
 2. build login
 3. build logout
 4. build current-user check
-5. write mini test cases for auth only
+5. connect Blazor login flow to backend session state
 
 Do not start projects CRUD before auth is stable.
-

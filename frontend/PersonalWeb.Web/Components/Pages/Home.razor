@@ -1,0 +1,211 @@
+﻿@page "/"
+
+<PageTitle>Ricardo Gao's home</PageTitle>
+
+<div class="home-shell">
+    <section class="intro-stage" id="top">
+        <div class="intro-copy">
+            <p class="eyebrow">WELCOME</p>
+            <HelloRotator @rendermode="InteractiveServer" />
+            @* interactiveserver means the component will be rendered on the server and then updated on the client *@
+            <h1>This is Ricardo.</h1>
+            <p class="intro">
+                Second Year Software Engineering Technology student at Conestoga College 
+
+                Excting For AI Development, Backend Development
+            </p>
+
+            <div class="hero-actions">
+                <a class="primary-cta" href="#featured-work">See My Projects</a>
+                @* this will jump to will id=featured-work *@
+            </div>
+
+            <div class="contact-row">
+                <span>Canada</span>
+                <a href="mailto:gaozhe0011@gmail.com">gaozhe0011@gmail.com</a>
+                <a href="tel:3828852156">382-885-2156</a>
+                <a href="https://www.linkedin.com/in/ricardo-gao/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://github.com/RicadoGz" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+
+            <div class="availability-chip">Available for May 2026 co-op · up to 16 months</div>
+        </div>
+    </section>
+
+    <section class="resume-section" id="featured-work">
+        <div class="section-head">
+            <p class="eyebrow">Featured Work</p>
+            <h2>Projects first, because that is the fastest way to understand what I actually build.</h2>
+        </div>
+
+        <div class="project-grid">
+            <article class="project-card">
+                <div class="project-meta">
+                    <h3>Open Claw-Inspired Market Sensing Agent</h3>
+                    <span>Feb 2026 – Present</span>
+                </div>
+                <p class="project-problem">Problem: turn noisy review, survey, and competitor data into recurring market insight.</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>SQL</span>
+                    <span>Power BI</span>
+                    <span>AI Agent</span>
+                </div>
+                <ul>
+                    <li>Used Python and SQL to clean and structure unstructured and structured data for recurring analysis.</li>
+                    <li>Created Power BI views to surface trends, competitor patterns, and stakeholder-ready insight summaries.</li>
+                </ul>
+            </article>
+
+            <article class="project-card">
+                <div class="project-meta">
+                    <h3>AI-Powered n8n Automation for Maintenance Request Triage</h3>
+                    <span>Mar 2026</span>
+                </div>
+                <p class="project-problem">Problem: reduce manual triage time for tenant requests and improve workflow reliability.</p>
+                <div class="project-tags">
+                    <span>n8n</span>
+                    <span>Anthropic API</span>
+                    <span>Automation</span>
+                </div>
+                <ul>
+                    <li>Integrated Anthropic API and exception handling for invalid, duplicate, and unmatched requests.</li>
+                    <li>Reduced manual effort by 7 to 8 hours per week with projected annual savings of about 18,000 RMB.</li>
+                </ul>
+            </article>
+
+            <article class="project-card">
+                <div class="project-meta">
+                    <h3>AI-Powered AuditRAG — Traceable Answering System</h3>
+                    <span>Jan 2026</span>
+                </div>
+                <p class="project-problem">Problem: make AI answers more traceable and less likely to drift away from source material.</p>
+                <div class="project-tags">
+                    <span>RAG</span>
+                    <span>Embeddings</span>
+                    <span>Retrieval</span>
+                </div>
+                <ul>
+                    <li>Implemented an AI research assistant for financial filings and market news.</li>
+                    <li>Enabled semantic top-k search across embedded chunks for traceable retrieval.</li>
+                </ul>
+            </article>
+
+            <article class="project-card">
+                <div class="project-meta">
+                    <h3>Stock Daily Report Automation (UIPath)</h3>
+                    <span>Jan 2026</span>
+                </div>
+                <p class="project-problem">Problem: automate daily reporting without fragile manual steps.</p>
+                <div class="project-tags">
+                    <span>UIPath</span>
+                    <span>Automation</span>
+                    <span>Reporting</span>
+                </div>
+                <ul>
+                    <li>Automated Outlook report distribution and reduced manual reporting steps by 30%.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="highlight-grid" id="why-ricardo">
+        <article>
+            <span class="signal-label">What I build</span>
+            <strong>RAG systems, automation, dashboards, and APIs</strong>
+            <p>I connect AI workflows with data pipelines and business-facing outputs instead of treating them as separate tracks.</p>
+        </article>
+        <article>
+            <span class="signal-label">Why it matters</span>
+            <strong>I focus on tools people can actually use</strong>
+            <p>My projects are built around retrieval quality, reporting clarity, workflow reliability, and measurable time savings.</p>
+        </article>
+        <article>
+            <span class="signal-label">How I work</span>
+            <strong>Fast execution with product thinking</strong>
+            <p>I like shipping end-to-end: ingestion, validation, retrieval, UI, automations, and the business logic around them.</p>
+        </article>
+        <article>
+            <span class="signal-label">Best roles</span>
+            <strong>AI engineer, data engineer, analytics engineer, product-minded SWE</strong>
+            <p>This portfolio is designed to show direct overlap with AI, automation, and insight-heavy technical roles.</p>
+        </article>
+    </section>
+
+    <section class="resume-section">
+        <div class="section-head">
+            <p class="eyebrow">Experience Snapshot</p>
+            <h2>Startup delivery, technical teaching, and developer community leadership</h2>
+        </div>
+
+        <div class="timeline">
+            <article class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Co-Founder & AI Developer</h3>
+                        <p>Stealth Startup · Waterloo / ON</p>
+                    </div>
+                    <span>Sep 2025 – Feb 2026</span>
+                </div>
+                <ul>
+                    <li>Designed and delivered a full-stack platform using Django and REST for end-to-end feature development.</li>
+                    <li>Built a chatbot RAG system on a 27K dataset with ingestion, dual retrieval, and deterministic ranking.</li>
+                    <li>Connected grounded answer generation with analytics and reporting outputs in Power BI.</li>
+                </ul>
+            </article>
+
+            <article class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>PAL Leader – C Programming</h3>
+                        <p>Conestoga College · Waterloo / ON</p>
+                    </div>
+                    <span>Jan 2025 – Apr 2025</span>
+                </div>
+                <ul>
+                    <li>Led 20 collaborative debugging sessions totaling 60 hours of hands-on technical support.</li>
+                    <li>Helped one student improve from 20% to 90% on quizzes and from 40% to 99.5% on assignments.</li>
+                </ul>
+            </article>
+
+            <article class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <h3>Executive Leader</h3>
+                        <p>Google Developer Group Waterloo · Waterloo / ON</p>
+                    </div>
+                    <span>Oct 2024 – Present</span>
+                </div>
+                <ul>
+                    <li>Built Python automation that reduced manual setup time by 75%.</li>
+                    <li>Helped attract 300 people through 6 workshops on Flask, Python, and Selenium.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="resume-section compact-grid" id="contact">
+        <article class="info-card">
+            <p class="eyebrow">Education</p>
+            <h3>Conestoga College</h3>
+            <p>Software Engineering Technology</p>
+            <p>GPA 3.9 / 4.0</p>
+            <p>Sep 2024 – Dec 2028</p>
+        </article>
+
+        <article class="info-card">
+            <p class="eyebrow">Skills</p>
+            <p><strong>Data & BI:</strong> Python, SQL, Power BI, dashboards, reporting, structured data ingestion, validation</p>
+            <p><strong>ML & AI:</strong> machine learning, generative AI, LLM, RAG, prompt engineering, Pandas, NumPy, scikit-learn</p>
+            <p><strong>Automation & APIs:</strong> OpenAI API, Anthropic API, UIPath, n8n, Django, FastAPI</p>
+            <p><strong>Tools & QA:</strong> GitHub, Selenium, schema validation, regression testing</p>
+        </article>
+
+        <article class="info-card">
+            <p class="eyebrow">Contact & Fit</p>
+            <p>Hackathons: ConHacks, SpurHacks</p>
+            <p>Volunteer: GDG Waterloo DevFest, Conestoga College Open House</p>
+            <p><strong>Best fit:</strong> AI engineering, data automation, analytics platforms, and product-minded software roles</p>
+        </article>
+    </section>
+</div>

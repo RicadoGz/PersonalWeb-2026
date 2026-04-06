@@ -1,0 +1,116 @@
+@inject IHttpClientFactory HttpClientFactory
+
+<div class="floating-agent">
+    @if (isOpen)
+    {
+        <section class="floating-agent-panel">
+            <div class="floating-agent-head">
+                <div>
+                    <strong>Ricardo AI</strong>
+                    <p>JD fit assistant</p>
+                    <small class="floating-agent-subline">Real-time RAG generated from portfolio context</small>
+                </div>
+                <button type="button" class="floating-close" @onclick="Toggle">×</button>
+            </div>
+
+            <div class="floating-agent-body">
+                @foreach (var message in messages)
+                {
+                    <div class="agent-message @(message.IsUser ? "agent-message-user" : "agent-message-bot")">
+                        @message.Text
+                    </div>
+                }
+            </div>
+
+            <div class="prompt-chip-row">
+                <button class="prompt-chip" type="button" @onclick='() => UsePrompt("Summarize Ricardo for a recruiter")'>Summarize Ricardo for a recruiter</button>
+                <button class="prompt-chip" type="button" @onclick='() => UsePrompt("Match Ricardo to this JD")'>Match Ricardo to this JD</button>
+                <button class="prompt-chip" type="button" @onclick='() => UsePrompt("Which projects fit AI roles?")'>Which projects fit AI roles?</button>
+            </div>
+
+            <form class="floating-agent-input" @onsubmit="HandleSubmit">
+                <input
+                    class="floating-agent-textbox"
+                    type="text"
+                    placeholder="Paste a job description or ask about fit"
+                    @bind="draftMessage" />
+                <button class="floating-send" type="submit" disabled="@isSending">@(isSending ? "..." : "Send")</button>
+            </form>
+        </section>
+    }
+
+    <button class="floating-agent-launcher" type="button" @onclick="Toggle" aria-label="Open Ricardo AI chat">
+        <span class="floating-agent-launcher-icon">AI</span>
+        <span class="floating-agent-launcher-copy">
+            <strong>Ricardo AI</strong>
+            <small>@(isOpen ? "Click to close" : "Paste a JD and test fit")</small>
+        </span>
+    </button>
+</div>
+
+@code {
+    private bool isOpen;
+    private string draftMessage = string.Empty;
+    private bool isSending;
+    private readonly List<ChatMessage> messages =
+    [
+        new(false, "Paste a job description and I will explain why Ricardo is a fit based on his projects, skills, and experience."),
+        new(true, "Why is Ricardo a fit for an AI engineering internship?"),
+        new(false, "He already ships RAG systems, automation workflows, analytics dashboards, and full-stack products, which maps well to applied AI and product-focused engineering roles.")
+    ];
+
+    private void Toggle()
+    {
+        isOpen = !isOpen;
+    }
+
+    private void UsePrompt(string prompt)
+    {
+        draftMessage = prompt;
+    }
+
+    private async Task HandleSubmit()
+    {
+        var userMessage = draftMessage.Trim();
+        if (string.IsNullOrWhiteSpace(userMessage) || isSending)
+        {
+            return;
+        }
+
+        messages.Add(new ChatMessage(true, userMessage));
+        draftMessage = string.Empty;
+        isSending = true;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient("BackendApi");
+            var response = await client.PostAsJsonAsync("/api/chat", new ChatRequest(userMessage));
+
+            if (!response.IsSuccessStatusCode)
+            {
+                messages.Add(new ChatMessage(false, "The portfolio assistant could not answer right now."));
+                return;
+            }
+
+            var payload = await response.Content.ReadFromJsonAsync<ChatResponse>();
+            var answer = payload?.Answer ?? "I could not generate an answer yet.";
+            messages.Add(new ChatMessage(false, answer));
+        }
+        catch
+        {
+            messages.Add(new ChatMessage(false, "The portfolio assistant is currently unavailable. Please try again."));
+        }
+        finally
+        {
+            isSending = false;
+        }
+    }
+
+    private sealed record ChatMessage(bool IsUser, string Text);
+
+    private sealed record ChatRequest(string Message);
+
+    private sealed record ChatResponse(string Answer, List<ChatSource>? Sources);
+
+    private sealed record ChatSource(string Title, string Snippet, string Category);
+}

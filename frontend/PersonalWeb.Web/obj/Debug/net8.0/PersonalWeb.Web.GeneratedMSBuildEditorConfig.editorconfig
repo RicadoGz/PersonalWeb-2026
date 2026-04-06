@@ -1,0 +1,75 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PersonalWeb.Web
+build_property.RootNamespace = PersonalWeb.Web
+build_property.ProjectDir = /Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/FloatingAgentWidget.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9GbG9hdGluZ0FnZW50V2lkZ2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/HelloRotator.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9IZWxsb1JvdGF0b3IucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/LoginFormCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Mb2dpbkZvcm1DYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/LoginPanel.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Mb2dpblBhbmVsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-7k8b7skb9d
+
+[/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-drtng6t4f2

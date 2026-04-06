@@ -1,0 +1,104 @@
+@inject IHttpClientFactory HttpClientFactory
+
+<section class="toolbar-login-panel login-page-card">
+    <div class="card-topline">
+        <span class="live-dot"></span>
+        <span>Auth handshake ready</span>
+    </div>
+
+    <h2>Sign in to the workspace</h2>
+    <p class="card-copy">
+        This form sends credentials to
+        <code>http://localhost:5264/api/auth/login</code>.
+    </p>
+
+    <EditForm Model="@loginForm" OnValidSubmit="@HandleLoginAsync" class="login-form">
+        <DataAnnotationsValidator />
+
+        <div class="field">
+            <label for="@UsernameId">Username</label>
+            <InputText id="@UsernameId" class="input" @bind-Value="loginForm.Username" />
+        </div>
+
+        <div class="field">
+            <label for="@PasswordId">Password</label>
+            <InputText id="@PasswordId" type="password" class="input" @bind-Value="loginForm.Password" />
+        </div>
+
+        <button class="login-button" type="submit" disabled="@isSubmitting">
+            @(isSubmitting ? "Connecting..." : "Enter system")
+        </button>
+    </EditForm>
+
+    <div class="hint-box">
+        <strong>Demo credentials</strong>
+        <div>Username: <code>demo-admin</code></div>
+        <div>Password: <code>123456</code></div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(statusMessage))
+    {
+        <div class="status-box @(isSuccess ? "status-success" : "status-error")">
+            @statusMessage
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter]
+    public string UsernameId { get; set; } = "login-username";
+
+    [Parameter]
+    public string PasswordId { get; set; } = "login-password";
+
+    private readonly LoginForm loginForm = new()
+    {
+        Username = "demo-admin",
+        Password = "123456"
+    };
+
+    private bool isSubmitting;
+    private bool isSuccess;
+    private string statusMessage = string.Empty;
+
+    private async Task HandleLoginAsync()
+    {
+        isSubmitting = true;
+        statusMessage = string.Empty;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient("BackendApi");
+            var response = await client.PostAsJsonAsync("/api/auth/login", loginForm);
+            var payload = await response.Content.ReadFromJsonAsync<LoginResponse>();
+
+            isSuccess = response.IsSuccessStatusCode;
+            statusMessage = response.IsSuccessStatusCode && payload is not null
+                ? $"Login success. Welcome, {payload.Username}."
+                : payload?.Error ?? "Login failed.";
+        }
+        catch (Exception ex)
+        {
+            isSuccess = false;
+            statusMessage = $"Request failed: {ex.Message}";
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+
+    private sealed class LoginForm
+    {
+        public string Username { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
+    }
+
+    private sealed class LoginResponse
+    {
+        public string? Username { get; set; }
+
+        public string? Error { get; set; }
+    }
+}

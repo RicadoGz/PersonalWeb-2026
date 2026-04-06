@@ -1,0 +1,41 @@
+@implements IDisposable
+
+<div class="hello-rotator" aria-label="Hello in different languages">
+    <div class="hello-rotator-window">
+        <span class="hello-rotator-word">@greetings[currentIndex]</span>
+    </div>
+</div>
+
+@code {
+    private readonly string[] greetings =
+    [
+        "Hi",
+        "你好",
+        "Bonjour",
+        "Hola",
+        "こんにちは",
+        "안녕하세요",
+        "Ciao",
+        "مرحبا",
+        "Olá",
+        "Merhaba",
+        "नमस्ते"
+    ];
+
+    private int currentIndex;
+    private Timer? timer;
+
+    protected override void OnInitialized()
+    {
+        timer = new Timer(async _ =>
+        {
+            currentIndex = (currentIndex + 1) % greetings.Length;
+            await InvokeAsync(StateHasChanged);
+        }, null, 1200, 1200);
+    }
+
+    public void Dispose()
+    {
+        timer?.Dispose();
+    }
+}

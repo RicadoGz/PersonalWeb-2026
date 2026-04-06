@@ -2,7 +2,7 @@
 
 ## 1. Feature Goal
 
-Build the smallest backend auth module for the personal website.
+Build the smallest C# auth backend module for the personal website.
 
 This module only needs to support:
 
@@ -55,7 +55,7 @@ Admin:
 
 ## 5. API Contract
 
-## 5.1 POST /login
+## 5.1 POST /api/auth/login
 
 Purpose:
 
@@ -98,7 +98,7 @@ Backend behavior:
 - create session if valid
 - return authenticated user info
 
-## 5.2 POST /logout
+## 5.2 POST /api/auth/logout
 
 Purpose:
 
@@ -124,7 +124,7 @@ Failure behavior:
 - if already logged out, can still return safe response or `401`
 - for first version, prefer simple and predictable behavior
 
-## 5.3 GET /me
+## 5.3 GET /api/auth/me
 
 Purpose:
 
@@ -179,8 +179,8 @@ This rule will be reused later for:
 
 1. receive username and password
 2. validate fields are present
-3. check credentials against Django user
-4. if valid, create session
+3. check credentials against stored admin user
+4. if valid, create auth cookie or session
 5. return authenticated response
 6. if invalid, return error response
 
@@ -200,82 +200,28 @@ This rule will be reused later for:
 
 Build this feature in this exact order:
 
-1. create login endpoint
-2. create logout endpoint
-3. create current-user endpoint
-4. add auth check helper for protected routes
-5. test auth endpoints
+1. create auth controller or minimal API endpoints
+2. create login endpoint
+3. create logout endpoint
+4. create current-user endpoint
+5. add auth check helper for protected routes
+6. connect Blazor login page to these endpoints
 
 Do not build project CRUD before these work.
 
-## 9. Mini Test Cases
+## 9. Recommended Implementation Notes
 
-## AUTH-001 Login success
-
-Purpose:
-
-- valid user can log in
-
-Expected:
-
-- response `200`
-- authenticated becomes `true`
-- session is created
-
-## AUTH-002 Login failure
-
-Purpose:
-
-- wrong password should fail
-
-Expected:
-
-- response `400`
-- error message returned
-- no session created
-
-## AUTH-003 Check current user when logged in
-
-Purpose:
-
-- system can confirm current authenticated user
-
-Expected:
-
-- response `200`
-- authenticated is `true`
-- correct username returned
-
-## AUTH-004 Check current user when logged out
-
-Purpose:
-
-- system correctly reports guest state
-
-Expected:
-
-- response `200`
-- authenticated is `false`
-
-## AUTH-005 Logout success
-
-Purpose:
-
-- logged-in user can log out
-
-Expected:
-
-- response `200`
-- authenticated becomes `false`
-- session removed
+- use ASP.NET Core authentication middleware
+- keep the first version simple with one admin user
+- use cookie auth first because it works well with Blazor and admin flows
+- keep response shapes small and predictable for frontend binding
 
 ## 10. Definition of Done
 
 Auth backend is done when:
 
-- `/login` works
-- `/logout` works
-- `/me` works
+- `/api/auth/login` works
+- `/api/auth/logout` works
+- `/api/auth/me` works
 - protected route returns `401` for guest
-- mini test cases for auth are written and pass
-
+- Blazor frontend can read current auth state correctly
