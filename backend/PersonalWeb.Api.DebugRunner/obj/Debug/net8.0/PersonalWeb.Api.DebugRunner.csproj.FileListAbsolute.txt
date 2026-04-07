@@ -1,0 +1,16 @@
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/bin/Debug/net8.0/Fixtures/tonal-linkedin-jd.txt
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/bin/Debug/net8.0/PersonalWeb.Api.DebugRunner
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/bin/Debug/net8.0/PersonalWeb.Api.DebugRunner.deps.json
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/bin/Debug/net8.0/PersonalWeb.Api.DebugRunner.runtimeconfig.json
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/bin/Debug/net8.0/PersonalWeb.Api.DebugRunner.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/bin/Debug/net8.0/PersonalWeb.Api.DebugRunner.pdb
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.GeneratedMSBuildEditorConfig.editorconfig
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.AssemblyInfoInputs.cache
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.AssemblyInfo.cs
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.csproj.CoreCompileInputs.cache
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.sourcelink.json
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/refint/PersonalWeb.Api.DebugRunner.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.pdb
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/PersonalWeb.Api.DebugRunner.genruntimeconfig.cache
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/obj/Debug/net8.0/ref/PersonalWeb.Api.DebugRunner.dll

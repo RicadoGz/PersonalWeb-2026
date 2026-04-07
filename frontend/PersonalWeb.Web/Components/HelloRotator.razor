@@ -1,5 +1,6 @@
 @implements IDisposable
 
+@* take different index for the component *@
 <div class="hello-rotator" aria-label="Hello in different languages">
     <div class="hello-rotator-window">
         <span class="hello-rotator-word">@greetings[currentIndex]</span>
@@ -27,11 +28,24 @@
 
     protected override void OnInitialized()
     {
-        timer = new Timer(async _ =>
+        timer = new Timer(TimerCallback, null, 1200, 1200);
+    }
+
+    private void TimerCallback(object? state)
+    {
+        currentIndex = currentIndex + 1;
+
+        if (currentIndex >= greetings.Length)
         {
-            currentIndex = (currentIndex + 1) % greetings.Length;
-            await InvokeAsync(StateHasChanged);
-        }, null, 1200, 1200);
+            currentIndex = 0;
+        }
+    //render the component on the UI thread after updating the index
+        InvokeAsync(UpdateUI);
+    }
+
+    private void UpdateUI()
+    {
+        StateHasChanged();
     }
 
     public void Dispose()

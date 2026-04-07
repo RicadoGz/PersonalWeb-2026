@@ -224,8 +224,9 @@ Read:
 
 Why:
 
-- all backend endpoints are currently here
-- auth and chat API are both defined here
+- this is the backend entry point
+- it shows which endpoints exist
+- it shows where chat gets handed off to deeper files
 
 What to focus on first:
 
@@ -233,54 +234,136 @@ What to focus on first:
 - `MapPost("/api/auth/login", ...)`
 - `MapGet("/api/auth/me", ...)`
 - `MapPost("/api/chat", ...)`
+- `MapPost("/api/chat/debug", ...)`
 
 Django analogy:
 
-- this file currently combines parts of `urls.py`, views, and lightweight service logic
-
-Important note:
-
-- right now the backend is intentionally minimal
-- later you would usually split this into controllers/services/modules
+- this is closest to a tiny `urls.py + views.py` entry layer
+- but most chat logic has already been split into dedicated service-style files
 
 ---
 
-## Step 9. Understand Chat Backend Logic
+## Step 9. Understand Act Routing
 
-Still in:
-[Program.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/Program.cs)
-
-Focus specifically on:
-
-- `ChatRequest`
-- `ChatResponse`
-- `ChatSource`
-- `KnowledgeItem`
-- `PortfolioRag`
+Read:
+[OllamaActionRouter.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/OllamaActionRouter.cs)
 
 Why:
 
-- this is the first-pass RAG-style logic
-- this is where retrieval happens
-- this is where the portfolio knowledge base is stored
+- this is where Ollama decides which act to run
+- this is the first "agent-like" step in the backend
+- this explains why not every user message follows the same pipeline
 
 What to understand:
 
-1. user sends a question
-2. backend tokenizes it
-3. backend compares it against knowledge items
-4. top matches are selected
-5. response text is built from matched items
-6. answer is sent back to frontend
+- allowed acts
+- local Ollama HTTP call
+- routing prompt
+- fallback behavior if Ollama is unavailable
 
 Django analogy:
 
-- this is like a view plus a simple service layer in one file
-- `PortfolioRag` is the equivalent of a tiny retrieval service
+- this is like a small intent-classification service before your actual view logic runs
 
 ---
 
-## Step 10. Understand Styling Last
+## Step 10. Understand Act Execution
+
+Read:
+[ChatReAct.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/ChatReAct.cs)
+
+Why:
+
+- this is the real execution layer for chat behavior
+- it maps routed acts to actual backend methods
+- it explains the three assistant behaviors clearly
+
+What to understand:
+
+- `recruiter-summary`
+- `job-match`
+- `ai-projects`
+- how debug responses are built
+
+Django analogy:
+
+- this is like a service layer that sits between a view and multiple specialized helpers
+
+---
+
+## Step 11. Understand JD Extraction
+
+Read:
+[OllamaJobAnalyzer.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/OllamaJobAnalyzer.cs)
+
+Why:
+
+- this file turns messy JD text into structured requirements
+- it is the first real step in the `job-match` act
+
+What to understand:
+
+- `JobRequirements`
+- Ollama extraction prompt
+- noisy LinkedIn text cleanup strategy
+- fallback extraction
+- deduplication and normalization
+
+Django analogy:
+
+- this is like a text-processing service that prepares retrieval input before search
+
+---
+
+## Step 12. Understand Portfolio RAG
+
+Read:
+[PortfolioRag.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/PortfolioRag.cs)
+
+Then read:
+[info.json](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/Properties/info.json)
+
+Why:
+
+- this is where the portfolio knowledge base is loaded
+- this is where chunking happens
+- this is where retrieval happens
+- this is where grounded answer text is built
+
+What to understand:
+
+1. `LoadKnowledge()`
+2. `AddDetailChunks()`
+3. `AddSkillChunk()`
+4. `BuildEmbedding()`
+5. `Search()`
+6. `BuildAnswer()`
+
+Django analogy:
+
+- this is closest to a retrieval service or search layer that reads a local data source instead of a database table
+
+---
+
+## Step 13. Understand Debugging Support
+
+Read:
+[Program.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.DebugRunner/Program.cs)
+
+Why:
+
+- this is the easiest way to inspect the full chat chain without the frontend
+- it shows router mode, router reason, extraction output, queries, sources, and final answer
+
+What to understand:
+
+- how `/api/chat/debug` is called
+- how the debug payload is printed
+- how to inspect the internal chain from the terminal
+
+---
+
+## Step 14. Understand Styling Last
 
 Read:
 [app.css](/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/wwwroot/app.css)
@@ -314,14 +397,17 @@ If you want the shortest path to understanding:
 3. [LoginFormCard.razor](/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Components/LoginFormCard.razor)
 4. [frontend Program.cs](/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/Program.cs)
 5. [backend Program.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/Program.cs)
-6. [app.css](/Users/gz/Desktop/coding/personalWeb/frontend/PersonalWeb.Web/wwwroot/app.css)
+6. [OllamaActionRouter.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/OllamaActionRouter.cs)
+7. [ChatReAct.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/ChatReAct.cs)
+8. [PortfolioRag.cs](/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/PortfolioRag.cs)
 
 That path is enough to understand:
 
 - what the site is
 - how frontend works
 - how frontend talks to backend
-- how the chatbot works
+- how the chatbot routes acts
+- how the chatbot retrieves evidence
 
 ---
 
@@ -338,7 +424,15 @@ Here is the quickest mapping:
 - `MainLayout.razor`
   similar to base template
 - `backend Program.cs`
-  like a compressed `urls.py + views.py + simple services`
+  like a compressed entry layer for endpoints
+- `OllamaActionRouter.cs`
+  like an intent router service
+- `ChatReAct.cs`
+  like an execution/orchestration service
+- `OllamaJobAnalyzer.cs`
+  like a requirement extraction service
+- `PortfolioRag.cs`
+  like a retrieval/search service
 - `app.css`
   shared frontend styling
 
@@ -378,8 +472,10 @@ Best next guided walkthrough options:
    if you want to understand page structure
 2. `FloatingAgentWidget.razor`
    if you want to understand interaction and chat flow
-3. `backend Program.cs`
-   if you want to understand the current RAG-style backend logic
+3. `ChatReAct.cs`
+   if you want to understand how different acts run
+4. `PortfolioRag.cs`
+   if you want to understand the retrieval logic
 
 If your goal is full understanding, the best next file is:
 

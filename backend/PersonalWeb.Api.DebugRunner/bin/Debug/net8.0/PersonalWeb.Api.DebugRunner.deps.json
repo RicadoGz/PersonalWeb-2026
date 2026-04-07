@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "PersonalWeb.Api.DebugRunner/1.0.0": {
+        "runtime": {
+          "PersonalWeb.Api.DebugRunner.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PersonalWeb.Api.DebugRunner/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

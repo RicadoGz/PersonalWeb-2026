@@ -1,5 +1,5 @@
 @inject IHttpClientFactory HttpClientFactory
-
+@* inject to get a server-side component*@
 <div class="floating-agent">
     @if (isOpen)
     {
@@ -7,7 +7,7 @@
             <div class="floating-agent-head">
                 <div>
                     <strong>Ricardo AI</strong>
-                    <p>JD fit assistant</p>
+                    <p>chatbot</p>
                     <small class="floating-agent-subline">Real-time RAG generated from portfolio context</small>
                 </div>
                 <button type="button" class="floating-close" @onclick="Toggle">×</button>
@@ -23,9 +23,10 @@
             </div>
 
             <div class="prompt-chip-row">
-                <button class="prompt-chip" type="button" @onclick='() => UsePrompt("Summarize Ricardo for a recruiter")'>Summarize Ricardo for a recruiter</button>
-                <button class="prompt-chip" type="button" @onclick='() => UsePrompt("Match Ricardo to this JD")'>Match Ricardo to this JD</button>
-                <button class="prompt-chip" type="button" @onclick='() => UsePrompt("Which projects fit AI roles?")'>Which projects fit AI roles?</button>
+                @foreach (var prompt in quickPrompts)
+                {
+                    <button class="prompt-chip" type="button" @onclick='() => UsePrompt(prompt)'>@prompt</button>
+                }
             </div>
 
             <form class="floating-agent-input" @onsubmit="HandleSubmit">
@@ -43,21 +44,39 @@
         <span class="floating-agent-launcher-icon">AI</span>
         <span class="floating-agent-launcher-copy">
             <strong>Ricardo AI</strong>
-            <small>@(isOpen ? "Click to close" : "Paste a JD and test fit")</small>
+            <small>@LauncherHint</small>
         </span>
     </button>
 </div>
 
 @code {
-    private bool isOpen;
-    private string draftMessage = string.Empty;
-    private bool isSending;
-    private readonly List<ChatMessage> messages =
+    // UI fallback strings used when the backend does not return a useful answer.
+    private const string EmptyAnswerMessage = "I could not generate an answer yet.";
+    private const string RequestFailedMessage = "The portfolio assistant is currently unavailable. Please try again.";
+    private const string RequestRejectedMessage = "The portfolio assistant could not answer right now.";
+
+    // These are the three main entry prompts the backend currently understands well.
+    private static readonly string[] quickPrompts =
     [
-        new(false, "Paste a job description and I will explain why Ricardo is a fit based on his projects, skills, and experience."),
-        new(true, "Why is Ricardo a fit for an AI engineering internship?"),
-        new(false, "He already ships RAG systems, automation workflows, analytics dashboards, and full-stack products, which maps well to applied AI and product-focused engineering roles.")
+        "Summarize Ricardo for a recruiter",
+        "Match Ricardo to this JD",
+        "Which projects fit AI roles?"
     ];
+
+    private static readonly List<ChatMessage> InitialMessages =
+    [
+        new(false, "I am AI assistant developer by Ricardo, Paste a job description and I will explain why Ricardo is a fit based on his projects, skills, and experience. (if he did not fit i won not lie on you:)"),
+
+    ];
+
+    // Local UI state for opening/closing the widget and handling send operations.
+    private bool isOpen;
+    private bool isSending;
+    private string draftMessage = string.Empty;
+    private readonly List<ChatMessage> messages = [.. InitialMessages];
+
+    // The launcher hint changes depending on whether the widget is open.
+    private string LauncherHint => isOpen ? "Click to close" : "Paste a JD and test fit";
 
     private void Toggle()
     {
@@ -71,34 +90,39 @@
 
     private async Task HandleSubmit()
     {
+        // Trim early so we do not send blank or whitespace-only messages.
         var userMessage = draftMessage.Trim();
         if (string.IsNullOrWhiteSpace(userMessage) || isSending)
         {
             return;
         }
 
-        messages.Add(new ChatMessage(true, userMessage));
+        // Optimistically add the user message before the backend round-trip finishes.
+        AddUserMessage(userMessage);
         draftMessage = string.Empty;
         isSending = true;
 
         try
         {
+            // The named HttpClient is configured in frontend Program.cs to point at the backend API.
             var client = HttpClientFactory.CreateClient("BackendApi");
             var response = await client.PostAsJsonAsync("/api/chat", new ChatRequest(userMessage));
 
             if (!response.IsSuccessStatusCode)
             {
-                messages.Add(new ChatMessage(false, "The portfolio assistant could not answer right now."));
+                AddAssistantMessage(RequestRejectedMessage);
                 return;
             }
 
+            // The backend returns a normalized ChatResponse with Answer + Sources.
+            // Right now the UI renders only the Answer text.
             var payload = await response.Content.ReadFromJsonAsync<ChatResponse>();
-            var answer = payload?.Answer ?? "I could not generate an answer yet.";
-            messages.Add(new ChatMessage(false, answer));
+            AddAssistantMessage(payload?.Answer ?? EmptyAnswerMessage);
         }
         catch
         {
-            messages.Add(new ChatMessage(false, "The portfolio assistant is currently unavailable. Please try again."));
+            // Network failures and backend failures collapse to one friendly UI message.
+            AddAssistantMessage(RequestFailedMessage);
         }
         finally
         {
@@ -106,6 +130,17 @@
         }
     }
 
+    private void AddUserMessage(string text)
+    {
+        messages.Add(new ChatMessage(true, text));
+    }
+
+    private void AddAssistantMessage(string text)
+    {
+        messages.Add(new ChatMessage(false, text));
+    }
+
+    // Local frontend-only records so the component can deserialize the API response.
     private sealed record ChatMessage(bool IsUser, string Text);
 
     private sealed record ChatRequest(string Message);

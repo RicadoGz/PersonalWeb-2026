@@ -24,3 +24,4 @@
 /Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/obj/Debug/net8.0/PersonalWeb.Api.pdb
 /Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/obj/Debug/net8.0/PersonalWeb.Api.genruntimeconfig.cache
 /Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/obj/Debug/net8.0/ref/PersonalWeb.Api.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api/bin/Debug/net8.0/Properties/info.json

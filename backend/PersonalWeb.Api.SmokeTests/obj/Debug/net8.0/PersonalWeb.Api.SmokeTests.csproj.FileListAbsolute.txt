@@ -1,0 +1,16 @@
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/bin/Debug/net8.0/Fixtures/tonal-linkedin-jd.txt
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/bin/Debug/net8.0/PersonalWeb.Api.SmokeTests
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/bin/Debug/net8.0/PersonalWeb.Api.SmokeTests.deps.json
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/bin/Debug/net8.0/PersonalWeb.Api.SmokeTests.runtimeconfig.json
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/bin/Debug/net8.0/PersonalWeb.Api.SmokeTests.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/bin/Debug/net8.0/PersonalWeb.Api.SmokeTests.pdb
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.GeneratedMSBuildEditorConfig.editorconfig
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.AssemblyInfoInputs.cache
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.AssemblyInfo.cs
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.csproj.CoreCompileInputs.cache
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.sourcelink.json
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/refint/PersonalWeb.Api.SmokeTests.dll
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.pdb
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/PersonalWeb.Api.SmokeTests.genruntimeconfig.cache
+/Users/gz/Desktop/coding/personalWeb/backend/PersonalWeb.Api.SmokeTests/obj/Debug/net8.0/ref/PersonalWeb.Api.SmokeTests.dll
