@@ -1,0 +1,35 @@
+name: .NET CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore solution
+        run: dotnet restore personalWeb.sln
+
+      - name: Build backend API
+        run: dotnet build backend/PersonalWeb.Api/PersonalWeb.Api.csproj --configuration Release --no-restore
+
+      - name: Build frontend web app
+        run: dotnet build frontend/PersonalWeb.Web/PersonalWeb.Web.csproj --configuration Release --no-restore
+
+      - name: Build debug runner
+        run: dotnet build backend/PersonalWeb.Api.DebugRunner/PersonalWeb.Api.DebugRunner.csproj --configuration Release --no-restore
+
+      - name: Build smoke tests
+        run: dotnet build backend/PersonalWeb.Api.SmokeTests/PersonalWeb.Api.SmokeTests.csproj --configuration Release --no-restore
